@@ -80,11 +80,16 @@ function Car(model, milesPerGallon) {
   this.odometer = 0;
 }
 
+
+
 Car.prototype.fill = function(gallons){
   return this.tank += gallons;
 };
 
+
+
 Car.prototype.drive = function(distance){
+
   let burnedGallons = distance / this.milesPerGallon;
 
   if( burnedGallons > this.tank ){
@@ -105,18 +110,31 @@ Car.prototype.drive = function(distance){
     - Besides the methods on Person.prototype, babies have the ability to `.play()`:
         + Should return a string "Playing with x", x being the favorite toy.
 */
-function Baby() {
+function Baby(name, age, favoriteToy) {
+  Person.call(this, name, age);
 
+  this.favoriteToy = favoriteToy;
+  
+  // this.eat();
+  // this.poop();
+  // this.toString(); 
+}
+
+// --- Inherit methods from Person
+Baby.prototype = Object.create(Person.prototype);
+
+Baby.prototype.play = function(favoriteToy){
+  return `Playing with ${this.favoriteToy}`;
 }
 
 /* 
   TASK 4
 
   In your own words explain the four principles for the "this" keyword below:
-  1. 
-  2. 
-  3. 
-  4. 
+  1. this keyword in the global scope refers to the Window object
+  2. When a constructor is being used,this refers to the instance that the constructor creates and returns
+  3. When a function is called, this refers to the name at the left of the dot.
+  4. When we call, apply and call methods, this is explicity defined.
 */
 
 
