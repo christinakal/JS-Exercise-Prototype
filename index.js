@@ -58,12 +58,6 @@ Person.prototype.toString = function(){
   return `${this.name} ${this.age}`;
 };
 
-// const firstPerson = new Person({
-//   name: 'Leo',
-//   age: '32'  
-// });
-
-// console.log('First Person: ' + firstPerson.eat('noodles'));
 
 /*
   TASK 2
@@ -79,9 +73,30 @@ Person.prototype.toString = function(){
         + The `drive` method should return a string "I ran out of fuel at x miles!" x being `odometer`.
 */
 
-function Car() {
-
+function Car(model, milesPerGallon) {
+  this.model = model;
+  this.milesPerGallon = milesPerGallon;
+  this.tank = 0;
+  this.odometer = 0;
 }
+
+Car.prototype.fill = function(gallons){
+  return this.tank += gallons;
+};
+
+Car.prototype.drive = function(distance){
+  let burnedGallons = distance / this.milesPerGallon;
+
+  if( burnedGallons > this.tank ){
+    burnedGallons = this.tank;
+    distance = this.tank * this.milesPerGallon;
+  }
+
+  this.odometer += distance;
+  this.tank -= burnedGallons;
+
+  if (this.tank === 0) return `I ran out of fuel at ${this.odometer} miles!`;
+};
 
 /*
   TASK 3
